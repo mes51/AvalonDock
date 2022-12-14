@@ -1624,6 +1624,13 @@ namespace AvalonDock
 
 				newFW.UpdateOwnership();
 
+				var parent = Parent as FrameworkElement;
+				while (parent != null)
+				{
+					newFW.InputBindings.AddRange(parent.InputBindings);
+					parent = parent.Parent as FrameworkElement;
+				}
+
 				// Fill list before calling Show (issue #254)
 				_fwList.Add(newFW);
 
@@ -1667,6 +1674,13 @@ namespace AvalonDock
 				};
 
 				newFW.UpdateOwnership();
+
+				var parent = Parent as FrameworkElement;
+				while (parent != null)
+				{
+					newFW.InputBindings.AddRange(parent.InputBindings);
+					parent = parent.Parent as FrameworkElement;
+				}
 
 				// Fill list before calling Show (issue #254)
 				_fwList.Add(newFW);
@@ -2769,6 +2783,14 @@ namespace AvalonDock
 				Top = fwTop,
 				Left = fwLeft
 			};
+
+			var parent = Parent as FrameworkElement;
+			while (parent != null)
+			{
+				fwc.InputBindings.AddRange(parent.InputBindings);
+				parent = parent.Parent as FrameworkElement;
+			}
+
 			//fwc.Owner = Window.GetWindow(this);
 			//fwc.SetParentToMainWindowOf(this);
 			_fwList.Add(fwc);
@@ -2865,6 +2887,14 @@ namespace AvalonDock
 					Top = contentModel.FloatingTop
 				};
 			}
+
+			var parent = Parent as FrameworkElement;
+			while (parent != null)
+			{
+				fwc.InputBindings.AddRange(parent.InputBindings);
+				parent = parent.Parent as FrameworkElement;
+			}
+
 			//fwc.Owner = Window.GetWindow(this);
 			//fwc.SetParentToMainWindowOf(this);
 			_fwList.Add(fwc);
